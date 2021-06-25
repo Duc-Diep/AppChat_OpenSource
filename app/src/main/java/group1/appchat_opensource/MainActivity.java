@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         Button btnOK = findViewById( R.id.btnOK );
         btnOK.setOnClickListener( v -> {
-            Toast.makeText( this, "Click OK", Toast.LENGTH_SHORT ).show();
+            Toast.makeText( this, "Hello", Toast.LENGTH_SHORT ).show();
         } );
     }
 }
