@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "930184148432",
+    "project_id": "appchatopensource",
+    "storage_bucket": "appchatopensource.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930184148432:android:ae63d26baed8a214fa35d5",
+        "android_client_info": {
+          "package_name": "group1.appchat_opensource"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930184148432-hujti6iqtok7mr67g16eduo4l848i07d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "group1.appchat_opensource",
+            "certificate_hash": "1a12c58cdc0a8beb1ee1d8f6491f723c61ee083f"
+          }
+        },
+        {
+          "client_id": "930184148432-4v0co351qk42bedd9pq5off1mgo7b6i4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr4y8GOeuKhuQ4gpyJTWg5xeGI9wv8-I8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930184148432-4v0co351qk42bedd9pq5off1mgo7b6i4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

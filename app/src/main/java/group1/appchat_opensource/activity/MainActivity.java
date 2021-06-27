@@ -1,10 +1,14 @@
-package group1.appchat_opensource;
+package group1.appchat_opensource.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseUser;
+
+import group1.appchat_opensource.R;
 
 public class MainActivity extends AppCompatActivity {
 
