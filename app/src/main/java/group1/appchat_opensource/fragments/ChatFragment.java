@@ -1,11 +1,23 @@
 package group1.appchat_opensource.fragments;
 
+import android.database.DatabaseUtils;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.common.util.DataUtils;
+
+import group1.appchat_opensource.R;
+import group1.appchat_opensource.databinding.ChatFragmentBinding;
+
 public class ChatFragment extends Fragment {
+    ChatFragmentBinding binding;
     public static ChatFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -15,8 +27,17 @@ public class ChatFragment extends Fragment {
         return fragment;
     }
 
+    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull @org.jetbrains.annotations.NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate( inflater,R.layout.chat_fragment,container,false );
+        return binding.getRoot();
     }
+    //
+//    @Override
+//    public View onCreateView(@NonNull  LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+//        binding = DataBindingUtil.inflate( inflater, R.layout.chat_fragment,container,false );
+//        return binding.getRoot();
+//    }
 }
