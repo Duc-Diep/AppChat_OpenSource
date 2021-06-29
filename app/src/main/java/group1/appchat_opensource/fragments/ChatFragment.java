@@ -1,6 +1,5 @@
 package group1.appchat_opensource.fragments;
 
-import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
-import com.google.android.gms.common.util.DataUtils;
 
 import group1.appchat_opensource.R;
 import group1.appchat_opensource.databinding.ChatFragmentBinding;
@@ -26,6 +23,7 @@ public class ChatFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Nullable
     @org.jetbrains.annotations.Nullable
