@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-
 import org.jetbrains.annotations.NotNull;
 
 import group1.appchat_opensource.R;
@@ -29,7 +28,6 @@ public class LoginFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
@@ -48,6 +46,5 @@ public class LoginFragment extends Fragment {
         if (password.isEmpty()){
             return;
         }
-
     }
 }
