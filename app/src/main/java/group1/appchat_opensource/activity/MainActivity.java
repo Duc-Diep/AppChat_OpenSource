@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         Button btnOK = findViewById( R.id.btnOK );
+
         btnOK.setOnClickListener( v -> {
             Toast.makeText( this, "Hello", Toast.LENGTH_SHORT ).show();
         } );
