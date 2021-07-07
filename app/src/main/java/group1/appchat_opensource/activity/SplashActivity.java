@@ -22,14 +22,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private void checkNetwork() {
         if (AppUtils.isAvailableNetword(this)){
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            },3000);
+            new Handler().postDelayed( () -> {
+                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            },2500);
+
         }else{
             Toast.makeText(this, "No network", Toast.LENGTH_SHORT).show();
         }
