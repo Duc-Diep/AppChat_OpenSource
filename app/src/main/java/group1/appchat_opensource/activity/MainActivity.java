@@ -1,6 +1,7 @@
 package group1.appchat_opensource.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseUser;
 
 import group1.appchat_opensource.R;
+import group1.appchat_opensource.fragments.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        Button btnOK = findViewById( R.id.btnOK );
+        getFragment(LoginFragment.newInstance());
 
-        btnOK.setOnClickListener( v -> {
-            Toast.makeText( this, "Hello", Toast.LENGTH_SHORT ).show();
-        } );
+    }
+    public void getFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.layout_login,fragment).commit();
     }
 }
