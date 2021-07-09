@@ -22,6 +22,7 @@ import group1.appchat_opensource.databinding.HomeFragmentBinding;
 
 public class HomeFragment extends Fragment {
     HomeFragmentBinding binding;
+
     public static HomeFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -35,10 +36,9 @@ public class HomeFragment extends Fragment {
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate( inflater, R.layout.home_fragment,container,false );
+        binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
         createNavigation();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.layout_chat,ListChatFragment.newInstance());
-
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, ListChatFragment.newInstance()).addToBackStack(null).commit();
         return binding.getRoot();
     }
 
@@ -46,9 +46,11 @@ public class HomeFragment extends Fragment {
         //create item
         AHBottomNavigationItem item1 = new AHBottomNavigationItem("Chats", R.drawable.chat, R.color.black);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem("Community", R.drawable.user_group, R.color.black);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Profile", R.drawable.profile, R.color.black);
         //add
         binding.bottomNavigation.addItem(item1);
         binding.bottomNavigation.addItem(item2);
+        binding.bottomNavigation.addItem(item3);
         //color
         binding.bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#FFFFFF"));
         // Use colored navigation with circle reveal effect
@@ -56,7 +58,7 @@ public class HomeFragment extends Fragment {
         binding.bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
         // Set current item programmatically
-        binding.bottomNavigation.setCurrentItem(1);
+        binding.bottomNavigation.setCurrentItem(0);
         binding.bottomNavigation.setNotificationBackgroundColor(Color.parseColor("#F63D2B"));
 
         // Change colors
@@ -67,13 +69,19 @@ public class HomeFragment extends Fragment {
 
 
         binding.bottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
-            Toast.makeText(getContext(), position+"", Toast.LENGTH_SHORT).show();
-            if (position==0){
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.layout_chat,ListChatFragment.newInstance());
-            }else{
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.layout_chat,CommunityFragment.newInstance());
-            }
+            Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
 
+            switch (position) {
+                case 0:
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, ListChatFragment.newInstance()).addToBackStack(null).commit();
+                    break;
+                case 1:
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, CommunityFragment.newInstance()).addToBackStack(null).commit();
+                    break;
+                case 2:
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, UserInforFragment.newInstance()).addToBackStack(null).commit();
+                    break;
+            }
 
             return true;
         });
