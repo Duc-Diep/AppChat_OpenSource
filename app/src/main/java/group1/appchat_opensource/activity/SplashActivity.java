@@ -27,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             },2500);
+
         }else{
             Toast.makeText(this, "No network", Toast.LENGTH_SHORT).show();
         }
