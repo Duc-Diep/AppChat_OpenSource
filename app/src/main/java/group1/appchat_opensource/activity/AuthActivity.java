@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import group1.appchat_opensource.R;
 import group1.appchat_opensource.fragments.LoginFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
