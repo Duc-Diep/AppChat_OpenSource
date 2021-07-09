@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkNetwork() {
-        if (AppUtils.isAvailableNetword(this)){
+        if (AppUtils.isAvailableNetwork(this)){
             new Handler().postDelayed( () -> {
                 Intent intent = new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(intent);

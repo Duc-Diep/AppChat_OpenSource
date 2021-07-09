@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 
 public class AppUtils {
-    public static boolean isAvailableNetword(Context context){
+    public static boolean isAvailableNetwork(Context context){
         if (context==null){
             return false;
         }
