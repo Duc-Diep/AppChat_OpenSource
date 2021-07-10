@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -49,7 +50,6 @@ public class ListChatFragment extends Fragment {
     String userId;
     List<User> listUser;
     User user;
-    String userImagelink;
 
     public static ListChatFragment newInstance() {
 
@@ -59,6 +59,7 @@ public class ListChatFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Nullable
     @Override
@@ -72,7 +73,7 @@ public class ListChatFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
                 if (user != null) {
-                    userImagelink = user.getImage_url();
+                    String userImagelink = user.getImage_url();
                     String username = user.getUsername();
                     if (getContext()!=null) {
                         if (userImagelink.equalsIgnoreCase("")){
@@ -89,9 +90,6 @@ public class ListChatFragment extends Fragment {
                 Toast.makeText(getContext(), "Error loaf Use Information", Toast.LENGTH_SHORT).show();
             }
         });
-        HashMap<String, Object> hm = new HashMap<>();
-        hm.put("status", STATUS_ON);
-        data.updateChildren(hm);
         getAllUser();
 
 //        binding.imgAvatar.setOnClickListener(v -> {
@@ -116,7 +114,7 @@ public class ListChatFragment extends Fragment {
                         listUser.add(user);
                     }
                 }
-                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),2,RecyclerView.VERTICAL,false);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
                 ListChatsAdapter adapter = new ListChatsAdapter(listUser,getContext());
                 adapter.setiOnClickChatItem(new IOnClickChatItem() {
                     @Override
@@ -139,22 +137,5 @@ public class ListChatFragment extends Fragment {
         });
 
     }
-    public void setStatus(String status){
-        try {
-            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            mAuth = FirebaseAuth.getInstance();
-            data = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-            HashMap<String,Object> hm = new HashMap<>();
-            hm.put("status",status);
-            data.updateChildren(hm);
-        }catch (Exception e){
 
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        setStatus(STATUS_OFF);
-    }
 }
