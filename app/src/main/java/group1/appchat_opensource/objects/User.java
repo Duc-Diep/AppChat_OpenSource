@@ -3,50 +3,31 @@ package group1.appchat_opensource.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User implements Parcelable {
-    String id,username,image_url,status,gender;
+public class User {
+    private String gender;
+    private String id;
+    private String image_url;
+    private String username;
+    private String status;
 
-    public User(String id, String username, String image_url, String status, String gender) {
+    public User() {
+    }
+
+    public User(String gender, String id, String image_url, String username, String status) {
+        this.gender = gender;
         this.id = id;
-        this.username = username;
         this.image_url = image_url;
+        this.username = username;
         this.status = status;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
         this.gender = gender;
     }
-
-    protected User(Parcel in) {
-        id = in.readString();
-        username = in.readString();
-        image_url = in.readString();
-        status = in.readString();
-        gender = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(username);
-        dest.writeString(image_url);
-        dest.writeString(status);
-        dest.writeString(gender);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -54,14 +35,6 @@ public class User implements Parcelable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getImage_url() {
@@ -72,6 +45,14 @@ public class User implements Parcelable {
         this.image_url = image_url;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -80,11 +61,14 @@ public class User implements Parcelable {
         this.status = status;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    @Override
+    public String toString() {
+        return "User{" +
+                "gender='" + gender + '\'' +
+                ", id='" + id + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", username='" + username + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

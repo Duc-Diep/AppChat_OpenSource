@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "930184148432",
+    "firebase_url": "https://appchatopensource-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "appchatopensource",
     "storage_bucket": "appchatopensource.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930184148432:android:ae63d26baed8a214fa35d5",
+        "mobilesdk_app_id": "1:930184148432:android:debfdaaa34d68c4efa35d5",
         "android_client_info": {
           "package_name": "group1.appchat_opensource"
         }
