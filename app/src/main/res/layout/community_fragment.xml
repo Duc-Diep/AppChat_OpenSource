@@ -7,6 +7,8 @@
         <LinearLayout
             android:id="@+id/layoutCommunity"
             android:layout_width="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_height="@dimen/_50sdp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
@@ -31,13 +33,16 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <SearchView
+                <EditText
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:queryHint="Tìm kiếm"
+                    android:layout_height="@dimen/_30sdp"
+                    android:hint="Search"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableStart="@drawable/search_icon"
+                    android:paddingLeft="@dimen/_10sdp"
                     android:background="@drawable/search_view">
-                </SearchView>
+                </EditText>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvUsers"
                     android:layout_below="@+id/layoutToolBar"
