@@ -9,21 +9,31 @@
             android:layout_width="match_parent"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_height="@dimen/_45sdp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
                 android:src="@drawable/chat"
                 android:padding="@dimen/_3sdp"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"/>
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
             <TextView
                 android:id="@+id/tvUsername"
                 android:text="Unknown"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/_10sdp"
+                android:layout_width="0dp"
+                android:layout_weight="5"
                 android:layout_height="match_parent"/>
-
+            <ImageView
+                android:id="@+id/btnDate"
+                android:layout_gravity="end"
+                android:src="@drawable/couple"
+                android:padding="@dimen/_6sdp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
         </LinearLayout>
         <ScrollView
             android:layout_below="@id/layoutToolBar"

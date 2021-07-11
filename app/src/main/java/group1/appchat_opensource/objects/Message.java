@@ -3,6 +3,9 @@ package group1.appchat_opensource.objects;
 public class Message {
     String senderId,receiverId,content,isSeen,time;
 
+    public Message() {
+    }
+
     public Message(String senderId, String receiverId, String content, String isSeen, String time) {
         this.senderId = senderId;
         this.receiverId = receiverId;
