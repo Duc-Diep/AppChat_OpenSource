@@ -10,6 +10,8 @@ public class User {
     private String username;
     private String status;
 
+    public User() {
+    }
 
     public User(String gender, String id, String image_url, String username, String status) {
         this.gender = gender;
