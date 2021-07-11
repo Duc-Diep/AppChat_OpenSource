@@ -16,9 +16,7 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        //getFragment(LoginFragment.newInstance());
-        startActivity( new Intent(this,ChatActivity.class) );
-
+        getFragment(LoginFragment.newInstance());
     }
     public void getFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.layout_login,fragment).commit();
