@@ -34,8 +34,18 @@
         android:text="Hello Friend"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgStatusSeen"
+        android:layout_below="@id/tvUsernameItem"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/logo"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
 </RelativeLayout>

@@ -68,6 +68,20 @@ public class ListChatFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = firebaseUser.getUid();
         data = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        getCurrentUserInfor();
+        getAllUser();
+
+//        binding.imgAvatar.setOnClickListener(v -> {
+//            Fragment fragment = UserInforFragment.newInstance(user);
+//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//            fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right).replace(R.id.layout_chat, fragment).addToBackStack(null).commit();
+//        });
+
+
+        return binding.getRoot();
+    }
+
+    private void getCurrentUserInfor() {
         data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,17 +104,8 @@ public class ListChatFragment extends Fragment {
                 Toast.makeText(getContext(), "Error loaf Use Information", Toast.LENGTH_SHORT).show();
             }
         });
-        getAllUser();
-
-//        binding.imgAvatar.setOnClickListener(v -> {
-//            Fragment fragment = UserInforFragment.newInstance(user);
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//            fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right).replace(R.id.layout_chat, fragment).addToBackStack(null).commit();
-//        });
-
-
-        return binding.getRoot();
     }
+
     public void getAllUser() {
         listUser = new ArrayList<>();
         data = FirebaseDatabase.getInstance().getReference("Users");
