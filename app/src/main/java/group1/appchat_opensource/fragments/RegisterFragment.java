@@ -58,6 +58,7 @@ public class RegisterFragment extends Fragment {
         String pass = binding.edtPass.getText().toString().trim();
         String repass = binding.edtRePass.getText().toString().trim();
         String username = binding.edtUsername.getText().toString().trim();
+        String gender = binding.rdBoy.isChecked()?"Nam":"Nữ";
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             binding.edtEmail.setError("Không đúng định dạng email");
             binding.edtEmail.requestFocus();
@@ -84,7 +85,7 @@ public class RegisterFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser firebaseUser = mAth.getCurrentUser();
-                    User user = new User("Nam",firebaseUser.getUid(),username,"","Offline");
+                    User user = new User(gender,firebaseUser.getUid(),username,"","Offline");
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener( new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
