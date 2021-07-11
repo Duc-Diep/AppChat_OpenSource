@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate( inflater, R.layout.login_fragment, container, false );
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        binding.edtEmail.setText( user.getEmail() );
+        if (user != null)   binding.edtEmail.setText( user.getEmail() );
         binding.btnRegis.setOnClickListener( v -> {
             Fragment fragment = RegisterFragment.newInstance();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

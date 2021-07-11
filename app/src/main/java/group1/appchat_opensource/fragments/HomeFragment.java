@@ -38,7 +38,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
         createNavigation();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, ListChatFragment.newInstance()).addToBackStack(null).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().
+                replace(R.id.fragment_home, ListChatFragment.newInstance()).addToBackStack(null).commit();
         return binding.getRoot();
     }
 
