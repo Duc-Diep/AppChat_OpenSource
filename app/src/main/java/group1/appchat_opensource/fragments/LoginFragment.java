@@ -46,6 +46,8 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate( inflater, R.layout.login_fragment, container, false );
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        binding.edtEmail.setText( user.getEmail() );
         binding.btnRegis.setOnClickListener( v -> {
             Fragment fragment = RegisterFragment.newInstance();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -58,6 +60,7 @@ public class LoginFragment extends Fragment {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             fragmentManager.beginTransaction().setCustomAnimations( R.anim.slide_in_right, R.anim.slide_out_right ).replace( R.id.layout_login, fragment ).addToBackStack( null ).commit();
         } );
+
         return binding.getRoot();
     }
 
@@ -91,7 +94,9 @@ public class LoginFragment extends Fragment {
 //                        Toast.makeText( getContext(), "Please check your email to verify your account", Toast.LENGTH_SHORT ).show();
 //                    }
                     Toast.makeText( getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT ).show();
-                    FirebaseAuth.getInstance().updateCurrentUser( user );
+                    if (binding.checkLogin.isChecked()){
+                        FirebaseAuth.getInstance().updateCurrentUser( user );
+                    }
                     binding.progessBar.setVisibility( View.GONE );
                     startActivity( new Intent(getContext(),ChatActivity.class) );
                 } else {

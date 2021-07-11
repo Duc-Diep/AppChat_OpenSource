@@ -3,6 +3,7 @@ package group1.appchat_opensource.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import group1.appchat_opensource.R;
@@ -15,8 +16,8 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        getFragment(LoginFragment.newInstance());
-
+        //getFragment(LoginFragment.newInstance());
+        startActivity( new Intent(this,ChatActivity.class) );
 
     }
     public void getFragment(Fragment fragment){
