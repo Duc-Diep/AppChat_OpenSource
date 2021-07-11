@@ -31,6 +31,7 @@ import group1.appchat_opensource.databinding.LoginFragmentBinding;
 public class LoginFragment extends Fragment {
     LoginFragmentBinding binding;
     FirebaseAuth mAuth;
+    String message = "";
 
     public static LoginFragment newInstance() {
 
