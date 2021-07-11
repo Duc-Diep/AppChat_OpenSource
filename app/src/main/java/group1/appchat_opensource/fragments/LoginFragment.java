@@ -65,12 +65,12 @@ public class LoginFragment extends Fragment {
         String email = binding.edtEmail.getText().toString().trim();
         String password = binding.edtPass.getText().toString().trim();
         if (!Patterns.EMAIL_ADDRESS.matcher( email ).matches()) {
-            binding.edtEmail.setError( "Incorrect format email" );
+            binding.edtEmail.setError( "Không đúng định dạng emails" );
             binding.edtEmail.requestFocus();
             return;
         }
         if (password.isEmpty()) {
-            binding.edtPass.setError( "Password must not empty" );
+            binding.edtPass.setError( "Mật khẩu không được để trống" );
             binding.edtPass.requestFocus();
             return;
         }
@@ -80,19 +80,22 @@ public class LoginFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if (user.isEmailVerified()) {
-                        Intent intent = new Intent( getContext(), ChatActivity.class );
-                        startActivity( intent );
-                        //   EventBus.getDefault().post(new EventCloseActivity());
-                        binding.progessBar.setVisibility( View.GONE );
-                    } else {
+//                    if (user.isEmailVerified()) {
+//                        Intent intent = new Intent( getContext(), ChatActivity.class );
+//                        startActivity( intent );
+//                        //   EventBus.getDefault().post(new EventCloseActivity());
+//                        binding.progessBar.setVisibility( View.GONE );
+//                    } else {
 //                        user.sendEmailVerification();
 //                        binding.progessBar.setVisibility( View.GONE );
 //                        Toast.makeText( getContext(), "Please check your email to verify your account", Toast.LENGTH_SHORT ).show();
-                    }
-
+//                    }
+                    Toast.makeText( getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT ).show();
+                    FirebaseAuth.getInstance().updateCurrentUser( user );
+                    binding.progessBar.setVisibility( View.GONE );
+                    startActivity( new Intent(getContext(),ChatActivity.class) );
                 } else {
-                    Toast.makeText( getContext(), "Failed to login! Please check your credentials", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText( getContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT ).show();
                     binding.progessBar.setVisibility( View.GONE );
                 }
             }
