@@ -97,7 +97,7 @@ public class UserInforFragment extends Fragment {
             manager.popBackStackImmediate();
         });
         binding.btnSignOut.setOnClickListener(v->signOut());
-        binding.imgChooseImg.setOnClickListener(v->{onClickRequestPermission();});
+        binding.imgChooseImg.setOnClickListener(v->{chooseImage();});
         binding.btnChangePassword.setOnClickListener(v -> {
             updatePassword();
         });
@@ -128,35 +128,7 @@ public class UserInforFragment extends Fragment {
                 Toast.makeText(getContext(), "Error loaf Use Information", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
-    private void onClickRequestPermission()
-    {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-        {
-            return;
-        }
-        if(getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-        {
-            chooseImage();
-        }
-        else
-        {
-            String [] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
-            requestPermissions(permission,MY_REQUEST_CODE);
-
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-        {
-            chooseImage();
-        }
-    }
-
     private void changeName() {
         data  = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String,Object> hm = new HashMap<>();
