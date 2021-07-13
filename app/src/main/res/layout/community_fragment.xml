@@ -12,7 +12,7 @@
             android:layout_height="@dimen/_50sdp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
-                android:src="@drawable/chat"
+                android:src="@drawable/logo"
                 android:padding="@dimen/_3sdp"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"/>
