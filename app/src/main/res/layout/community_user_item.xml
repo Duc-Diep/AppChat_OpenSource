@@ -6,7 +6,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAvatarUserItem"
-        android:src="@drawable/chat"
+        android:src="@drawable/profile"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp" />
 
