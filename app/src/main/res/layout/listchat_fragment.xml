@@ -27,7 +27,7 @@
                 android:layout_weight="5"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:id="@+id/btnDate"
+                android:id="@+id/btnCouple"
                 android:layout_gravity="end"
                 android:src="@drawable/couple"
                 android:padding="@dimen/_6sdp"

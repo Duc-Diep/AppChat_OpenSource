@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
 
 
         binding.bottomNavigation.setOnTabSelectedListener((position, wasSelected) -> {
-            Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
 
             switch (position) {
                 case 0:
