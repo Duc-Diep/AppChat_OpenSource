@@ -96,21 +96,23 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     Message message = snapshot.getValue(Message.class);
-                    if (message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId()) || message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
-                    {
-                        if (!message.getSenderId().equals(firebaseUser.getUid()))
-                            lastMessage = message.getContent();
-                        else
-                            lastMessage = "You : "+message.getContent();
-                    }
+                        if (message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId()) || message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
+                        {
+                            if (!message.getSenderId().equals(firebaseUser.getUid()))
+                                lastMessage = message.getContent();
+                            else
+                                lastMessage = "You : "+message.getContent();
+                        }
 
-                    textView.setText(lastMessage);
-                    if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
-                    {
-                        Glide.with(context).load(user.getImage_url()).into(circleImageView);
-                    }else{
-                        circleImageView.setVisibility(View.INVISIBLE);
-                    }
+                        textView.setText(lastMessage);
+                        if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
+                        {
+                            Glide.with(context).load(user.getImage_url()).into(circleImageView);
+                        }else{
+                            circleImageView.setVisibility(View.INVISIBLE);
+                        }
+
+
                 }
             }
 

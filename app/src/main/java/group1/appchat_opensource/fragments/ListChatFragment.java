@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,10 +32,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import group1.appchat_opensource.R;
 import group1.appchat_opensource.adapters.ListChatsAdapter;
 import group1.appchat_opensource.databinding.ListchatFragmentBinding;
 import group1.appchat_opensource.events.IOnClickChatItem;
+import group1.appchat_opensource.objects.Message;
 import group1.appchat_opensource.objects.User;
 
 import static group1.appchat_opensource.configs.Constant.IMG_LINK_FEMALE_DEFAULT;
@@ -50,6 +53,7 @@ public class ListChatFragment extends Fragment {
     String userId;
     List<User> listUser;
     User user;
+    boolean check = false;
 
     public static ListChatFragment newInstance() {
 
@@ -70,13 +74,9 @@ public class ListChatFragment extends Fragment {
         data = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         getCurrentUserInfor();
         getAllUser();
-
-//        binding.imgAvatar.setOnClickListener(v -> {
-//            Fragment fragment = UserInforFragment.newInstance(user);
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//            fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right).replace(R.id.layout_chat, fragment).addToBackStack(null).commit();
-//        });
-
+        binding.btnCouple.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "This feature is under maintenance", Toast.LENGTH_SHORT).show();
+        });
 
         return binding.getRoot();
     }
@@ -115,10 +115,11 @@ public class ListChatFragment extends Fragment {
                 listUser.clear();
                 for (DataSnapshot data : snapshot.getChildren()) {
                     User user = data.getValue(User.class);
-                    if(user!=null&&!user.getId().equals(userId)){
+                    if(user!=null&&!user.getId().equals(userId)&&hasLastMessage(user)){
                         listUser.add(user);
                     }
                 }
+
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
                 ListChatsAdapter adapter = new ListChatsAdapter(listUser,getContext());
                 adapter.setiOnClickChatItem(new IOnClickChatItem() {
@@ -141,6 +142,38 @@ public class ListChatFragment extends Fragment {
             }
         });
 
+    }
+
+    public boolean hasLastMessage (User user)
+    {
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        data = FirebaseDatabase.getInstance().getReference("Chats");
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    Message message = snapshot.getValue(Message.class);
+                    if (message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId()) || message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
+                    {
+                        check =true;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        if (check){
+            check=false;
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
