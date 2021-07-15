@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -96,10 +97,10 @@ public class CommunityFragment extends Fragment {
                 adapter.setiOnClickChatItem(new IOnClickChatItem() {
                     @Override
                     public void IOnClickItem(User user) {
-//                        Fragment fragment = ChatFragment.newInstance(user,userImagelink);
-//                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_right).replace(R.id.layout_chat,fragment).addToBackStack(null).commit();
-                        Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
+                        Fragment fragment = ChatFragment.newInstance(user,user.getImage_url());
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_right).replace(R.id.layout_chat,fragment).addToBackStack(null).commit();
+                       // Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                 });

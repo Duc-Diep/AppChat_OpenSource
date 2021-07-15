@@ -3,7 +3,7 @@ package group1.appchat_opensource.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User {
+public class User implements Parcelable {
     private String gender;
     private String id;
     private String image_url;
@@ -20,6 +20,26 @@ public class User {
         this.username = username;
         this.status = status;
     }
+
+    protected User(Parcel in) {
+        gender = in.readString();
+        id = in.readString();
+        image_url = in.readString();
+        username = in.readString();
+        status = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getGender() {
         return gender;
@@ -70,5 +90,20 @@ public class User {
                 ", username='" + username + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(gender);
+        dest.writeString(id);
+        dest.writeString(image_url);
+        dest.writeString(username);
+        dest.writeString(status);
     }
 }
