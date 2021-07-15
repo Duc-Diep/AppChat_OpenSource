@@ -52,7 +52,7 @@ public class ListChatFragment extends Fragment {
     DatabaseReference data;
     String userId;
     List<User> listUser;
-    User user;
+    User user,currentUser;
     boolean check = false;
 
     public static ListChatFragment newInstance() {
@@ -71,6 +71,7 @@ public class ListChatFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.listchat_fragment, container, false);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = firebaseUser.getUid();
+        currentUser = new User();
         data = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         getCurrentUserInfor();
         getAllUser();
@@ -87,15 +88,12 @@ public class ListChatFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user = snapshot.getValue(User.class);
                 if (user != null) {
-                    String userImagelink = user.getImage_url();
-                    String username = user.getUsername();
+
                     if (getContext()!=null) {
-                        if (userImagelink.equalsIgnoreCase("")){
-                            Glide.with(getContext()).load(IMG_LINK_MALE_DEFAULT).into(binding.imgAvatar);
-                        }else
-                            Glide.with(getContext()).load(userImagelink).into(binding.imgAvatar);
+
+                            Glide.with(getContext()).load(user.getImage_url()).into(binding.imgAvatar);
                     }
-                    binding.tvUsername.setText(username);
+                    binding.tvUsername.setText(user.getUsername());
                 }
             }
 
@@ -114,9 +112,9 @@ public class ListChatFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listUser.clear();
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    User user = data.getValue(User.class);
-                    if(user!=null&&!user.getId().equals(userId)&&hasLastMessage(user)){
-                        listUser.add(user);
+                    User otherUser = data.getValue(User.class);
+                    if(otherUser!=null&&!otherUser.getId().equals(userId)){
+                        listUser.add(otherUser);
                     }
                 }
 
@@ -144,9 +142,8 @@ public class ListChatFragment extends Fragment {
 
     }
 
-    public boolean hasLastMessage (User user)
+    public boolean hasLastMessage (User otherUser)
     {
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         data = FirebaseDatabase.getInstance().getReference("Chats");
         data.addValueEventListener(new ValueEventListener() {
@@ -156,9 +153,10 @@ public class ListChatFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     Message message = snapshot.getValue(Message.class);
-                    if (message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId()) || message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
+                    if ((message.getReceiverId().equals(userId) && message.getSenderId().equals(otherUser.getId())) || (message.getReceiverId().equals(otherUser.getId()) && message.getSenderId().equals(userId)))
                     {
                         check =true;
+                        break;
                     }
                 }
             }
@@ -169,7 +167,7 @@ public class ListChatFragment extends Fragment {
             }
         });
         if (check){
-            check=false;
+            check = false;
             return true;
         }else{
             return false;

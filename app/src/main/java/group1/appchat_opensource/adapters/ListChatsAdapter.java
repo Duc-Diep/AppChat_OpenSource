@@ -2,6 +2,7 @@ package group1.appchat_opensource.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,8 +87,9 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
         }
     }
 
-    public void lastMessage (final User user , final TextView textView, CircleImageView circleImageView)
+    public void lastMessage (User user , TextView textView, CircleImageView circleImageView)
     {
+        lastMessage = "";
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -96,21 +98,26 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     Message message = snapshot.getValue(Message.class);
-                        if (message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId()) || message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
+                    Log.d("TAG", "Message: "+message.getContent());
+                        if ((message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId())) || (message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid())))
                         {
-                            if (!message.getSenderId().equals(firebaseUser.getUid()))
+                            if (!message.getSenderId().equals(firebaseUser.getUid())){
                                 lastMessage = message.getContent();
-                            else
+                            }
+                            else{
                                 lastMessage = "You : "+message.getContent();
+                                if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
+                                {
+                                    Glide.with(context).load(user.getImage_url()).into(circleImageView);
+                                }else{
+                                    circleImageView.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            textView.setText(lastMessage);
+
+                            break;
                         }
 
-                        textView.setText(lastMessage);
-                        if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
-                        {
-                            Glide.with(context).load(user.getImage_url()).into(circleImageView);
-                        }else{
-                            circleImageView.setVisibility(View.INVISIBLE);
-                        }
 
 
                 }
