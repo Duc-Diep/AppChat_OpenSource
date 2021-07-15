@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,6 +98,7 @@ public class UserInforFragment extends Fragment {
             manager.popBackStackImmediate();
         });
         binding.btnSignOut.setOnClickListener(v->signOut());
+
         binding.imgChooseImg.setOnClickListener(v->{onClickRequestPermission();});
         binding.btnChangePassword.setOnClickListener(v -> {
             updatePassword();
@@ -128,6 +130,7 @@ public class UserInforFragment extends Fragment {
                 Toast.makeText(getContext(), "Error loaf Use Information", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
     private void onClickRequestPermission()

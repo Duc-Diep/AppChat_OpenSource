@@ -96,8 +96,8 @@ public class CommunityFragment extends Fragment {
                 CommunityAdapter adapter = new CommunityAdapter(listUser,getContext());
                 adapter.setiOnClickChatItem(new IOnClickChatItem() {
                     @Override
-                    public void IOnClickItem(User user) {
-                        Fragment fragment = ChatFragment.newInstance(user,user.getImage_url());
+                    public void IOnClickItem(User other_user) {
+                        Fragment fragment = ChatFragment.newInstance(other_user,user.getImage_url());
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_right).replace(R.id.layout_chat,fragment).addToBackStack(null).commit();
                        // Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
