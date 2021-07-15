@@ -78,11 +78,9 @@ public class LoginFragment extends Fragment {
             return;
         }
         binding.progessBar.setVisibility( View.VISIBLE );
-        mAuth.signInWithEmailAndPassword( email, password ).addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth.signInWithEmailAndPassword( email, password ).addOnCompleteListener( task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                    if (user.isEmailVerified()) {
 //                        Intent intent = new Intent( getContext(), ChatActivity.class );
 //                        startActivity( intent );
@@ -93,16 +91,15 @@ public class LoginFragment extends Fragment {
 //                        binding.progessBar.setVisibility( View.GONE );
 //                        Toast.makeText( getContext(), "Please check your email to verify your account", Toast.LENGTH_SHORT ).show();
 //                    }
-                    Toast.makeText( getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT ).show();
-                    if (binding.checkLogin.isChecked()){
-                        FirebaseAuth.getInstance().updateCurrentUser( user );
-                    }
-                    binding.progessBar.setVisibility( View.GONE );
-                    startActivity( new Intent(getContext(),ChatActivity.class) );
-                } else {
-                    Toast.makeText( getContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT ).show();
-                    binding.progessBar.setVisibility( View.GONE );
+                Toast.makeText( getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT ).show();
+                if (binding.checkLogin.isChecked()){
+                    FirebaseAuth.getInstance().updateCurrentUser( user );
                 }
+                binding.progessBar.setVisibility( View.GONE );
+                startActivity( new Intent(getContext(),ChatActivity.class) );
+            } else {
+                Toast.makeText( getContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT ).show();
+                binding.progessBar.setVisibility( View.GONE );
             }
         } );
     }
@@ -114,6 +111,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null){
+            startActivity( new Intent(getContext(),ChatActivity.class) );
+        }
         //EventBus.getDefault().register(getContext());
     }
 
