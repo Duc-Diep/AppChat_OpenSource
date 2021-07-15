@@ -94,8 +94,8 @@ public class UserInforFragment extends Fragment {
         });
         binding.btnBack.setColorFilter(Color.BLUE);
         binding.btnBack.setOnClickListener(v->{
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            manager.popBackStackImmediate();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace( R.id.fragment_home,ListChatFragment.newInstance() ).commit();
         });
         binding.btnSignOut.setOnClickListener(v->signOut());
 
