@@ -120,8 +120,8 @@ public class UserInforFragment extends Fragment {
                             Glide.with(getContext()).load(userImagelink).into(binding.imgAvatarUser);
                     }
                     binding.edtUsernameInfor.setText(username);
-                    binding.txtEmail.setText("Email:"+firebaseUser.getEmail());
-                    binding.txtGender.setText("Gender:"+user.getGender());
+                    binding.txtEmail.setText("Email: "+firebaseUser.getEmail());
+                    binding.txtGender.setText("Gender: "+user.getGender());
                 }
             }
 
@@ -137,6 +137,7 @@ public class UserInforFragment extends Fragment {
     {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
         {
+            chooseImage();
             return;
         }
         if(getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)

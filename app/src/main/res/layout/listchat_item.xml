@@ -43,7 +43,6 @@
         android:layout_below="@id/tvUsernameItem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/logo"
         android:layout_width="@dimen/_10sdp"
         android:layout_height="@dimen/_10sdp">
 

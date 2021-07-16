@@ -105,9 +105,7 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
                     listMessage.add(message);
                 }
                 Collections.reverse(listMessage);
-                for (Message message : listMessage
-                ) {
-
+                for (Message message : listMessage) {
 //                    Log.d("TAG", "Message: "+message.getContent());
                     if ((message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId())) || (message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))) {
                         if (!message.getSenderId().equals(firebaseUser.getUid())) {
