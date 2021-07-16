@@ -52,7 +52,9 @@ public class ListChatFragment extends Fragment {
     DatabaseReference data;
     String userId;
     List<User> listUser;
-    User user,currentUser;
+    //    List<Message> listMessage;
+    List<String> chatList;
+    User user, currentUser;
     boolean check = false;
 
     public static ListChatFragment newInstance() {
@@ -72,9 +74,18 @@ public class ListChatFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userId = firebaseUser.getUid();
         currentUser = new User();
+        chatList = new ArrayList<>();
+//        listMessage = new ArrayList<>();
+        listUser = new ArrayList<>();
         data = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         getCurrentUserInfor();
+        getAllMessage();
+//        for (Message mes: listMessage
+//             ) {
+//            Log.d("TAG", "Message: "+mes.toString());
+//        }
         getAllUser();
+
         binding.btnCouple.setOnClickListener(v -> {
             Toast.makeText(getContext(), "This feature is under maintenance", Toast.LENGTH_SHORT).show();
         });
@@ -89,9 +100,9 @@ public class ListChatFragment extends Fragment {
                 user = snapshot.getValue(User.class);
                 if (user != null) {
 
-                    if (getContext()!=null) {
+                    if (getContext() != null) {
 
-                            Glide.with(getContext()).load(user.getImage_url()).into(binding.imgAvatar);
+                        Glide.with(getContext()).load(user.getImage_url()).into(binding.imgAvatar);
                     }
                     binding.tvUsername.setText(user.getUsername());
                 }
@@ -105,28 +116,31 @@ public class ListChatFragment extends Fragment {
     }
 
     public void getAllUser() {
-        listUser = new ArrayList<>();
+
         data = FirebaseDatabase.getInstance().getReference("Users");
         data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listUser.clear();
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    User otherUser = data.getValue(User.class);
-                    if(otherUser!=null&&!otherUser.getId().equals(userId)){
-                        listUser.add(otherUser);
+                for (String id : chatList) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        User otherUser = data.getValue(User.class);
+                        assert otherUser != null;
+                        if (otherUser.getId().equals(id)) {
+                            listUser.add(0,otherUser);
+                        }
                     }
                 }
 
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
-                ListChatsAdapter adapter = new ListChatsAdapter(listUser,getContext());
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                ListChatsAdapter adapter = new ListChatsAdapter(listUser, getContext());
                 adapter.setiOnClickChatItem(new IOnClickChatItem() {
                     @Override
                     public void IOnClickItem(User other_user) {
-                        Fragment fragment = ChatFragment.newInstance(other_user,user.getImage_url());
+                        Fragment fragment = ChatFragment.newInstance(other_user, user.getImage_url());
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_right).replace(R.id.layout_chat,fragment).addToBackStack(null).commit();
-                       // Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
+                        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right).replace(R.id.layout_chat, fragment).addToBackStack(null).commit();
+                        // Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                 });
@@ -142,23 +156,24 @@ public class ListChatFragment extends Fragment {
 
     }
 
-    public boolean hasLastMessage (User otherUser)
-    {
+    public void getAllMessage() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         data = FirebaseDatabase.getInstance().getReference("Chats");
         data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
+                chatList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Message message = snapshot.getValue(Message.class);
-                    if ((message.getReceiverId().equals(userId) && message.getSenderId().equals(otherUser.getId())) || (message.getReceiverId().equals(otherUser.getId()) && message.getSenderId().equals(userId)))
-                    {
-                        check =true;
-                        break;
+                    if (message.getSenderId().equals(firebaseUser.getUid())) {
+                        chatList.remove(message.getReceiverId());
+                        chatList.add(message.getReceiverId());
+                    } else if (message.getReceiverId().equals(firebaseUser.getUid())) {
+                        chatList.remove(message.getSenderId());
+                        chatList.add(message.getSenderId());
                     }
                 }
+                getAllUser();
             }
 
             @Override
@@ -166,12 +181,7 @@ public class ListChatFragment extends Fragment {
 
             }
         });
-        if (check){
-            check = false;
-            return true;
-        }else{
-            return false;
-        }
+
     }
 
 }

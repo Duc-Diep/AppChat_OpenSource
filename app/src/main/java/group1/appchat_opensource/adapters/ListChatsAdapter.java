@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,7 +40,9 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
     IOnClickChatItem iOnClickChatItem;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
+    List<Message> listMessage;
     String lastMessage;
+
     public ListChatsAdapter(List<User> list, Context context) {
         this.list = list;
         this.context = context;
@@ -50,7 +55,7 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
     @NonNull
     @Override
     public ListChatsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.listchat_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.listchat_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -59,13 +64,13 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
         User user = list.get(position);
         holder.tvUsername.setText(user.getUsername().trim());
         Glide.with(context).load(user.getImage_url()).into(holder.imgAvatar);
-        if (user.getStatus().equals(STATUS_ON)){
+        if (user.getStatus().equals(STATUS_ON)) {
             holder.imgStatus.setBackgroundResource(R.drawable.is_online);
-        }else{
+        } else {
             holder.imgStatus.setBackgroundResource(R.drawable.is_offline);
         }
-        holder.itemView.setOnClickListener(v-> iOnClickChatItem.IOnClickItem(user));
-        lastMessage(user,holder.tvLastMessage,holder.imgStatusSeen);
+        holder.itemView.setOnClickListener(v -> iOnClickChatItem.IOnClickItem(user));
+        lastMessage(user, holder.tvLastMessage, holder.imgStatusSeen);
     }
 
     @Override
@@ -74,9 +79,10 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView imgAvatar,imgStatusSeen;
+        CircleImageView imgAvatar, imgStatusSeen;
         ImageView imgStatus;
-        TextView tvUsername,tvLastMessage;
+        TextView tvUsername, tvLastMessage;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgAvatar = itemView.findViewById(R.id.imgAvatarUserItem);
@@ -87,39 +93,37 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
         }
     }
 
-    public void lastMessage (User user , TextView textView, CircleImageView circleImageView)
-    {
-        lastMessage = "";
+    public void lastMessage(User user, TextView textView, CircleImageView circleImageView) {
+        listMessage = new ArrayList<>();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Message message = snapshot.getValue(Message.class);
-                    Log.d("TAG", "Message: "+message.getContent());
-                        if ((message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId())) || (message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid())))
-                        {
-                            if (!message.getSenderId().equals(firebaseUser.getUid())){
-                                lastMessage = message.getContent();
-                            }
-                            else{
-                                lastMessage = "You : "+message.getContent();
-                                if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))
-                                {
-                                    Glide.with(context).load(user.getImage_url()).into(circleImageView);
-                                }else{
-                                    circleImageView.setVisibility(View.INVISIBLE);
-                                }
-                            }
-                            textView.setText(lastMessage);
+                    listMessage.add(message);
+                }
+                Collections.reverse(listMessage);
+                for (Message message : listMessage
+                ) {
 
-                            break;
+//                    Log.d("TAG", "Message: "+message.getContent());
+                    if ((message.getReceiverId().equals(firebaseUser.getUid()) && message.getSenderId().equals(user.getId())) || (message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid()))) {
+                        if (!message.getSenderId().equals(firebaseUser.getUid())) {
+                            lastMessage = message.getContent();
+                        } else {
+                            lastMessage = "You : " + message.getContent();
+                            if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid())) {
+                                Glide.with(context).load(user.getImage_url()).into(circleImageView);
+                            } else {
+                                circleImageView.setVisibility(View.INVISIBLE);
+                            }
                         }
+                        textView.setText(lastMessage);
 
-
-
+                        break;
+                    }
                 }
             }
 

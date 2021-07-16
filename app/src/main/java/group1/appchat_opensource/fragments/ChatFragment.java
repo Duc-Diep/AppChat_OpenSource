@@ -90,6 +90,7 @@ public class ChatFragment extends Fragment {
         String date = df.format(Calendar.getInstance().getTime());
         hm.put("time",date);
         databaseReference.child("Chats").push().setValue(hm);
+
     }
     public void readMessage(String myId,String receiveID){
         list = new ArrayList<>();
