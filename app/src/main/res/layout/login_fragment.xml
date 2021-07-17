@@ -19,7 +19,7 @@
             android:id="@+id/textview_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Đăng Nhập"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/imgChat"
             android:layout_centerHorizontal="true"
@@ -29,6 +29,7 @@
             android:textStyle="bold" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
+            android:background="@null"
             android:layout_centerHorizontal="true"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
@@ -41,8 +42,9 @@
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
-                android:drawablePadding="10dp"
-                android:textSize="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:hint="Enter your email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -51,6 +53,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_centerHorizontal="true"
             android:id="@+id/layoutEdtPass"
+            android:background="@null"
             android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
@@ -60,10 +63,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:drawableStart="@drawable/custom_lock_icon"
                 android:background="@drawable/custom_text_input"
-                android:drawablePadding="10dp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_9sdp"
                 android:id="@+id/edtPass"
                 android:inputType="textPassword"
                 android:hint="Enter your password"
@@ -71,7 +75,7 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
         <CheckBox
-            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_27sdp"
             android:fontFamily="@font/regular"
             android:id="@+id/checkLogin"
             android:text="Remember login"
