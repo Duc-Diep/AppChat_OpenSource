@@ -61,10 +61,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.tvMessage.setText( messageSend.getContent() );
         if (holder.getItemViewType() == MSG_RIGHT_TYPE) {
             Glide.with( context ).load( imgSender ).into( holder.imgAvatar );
-            if (messageSend.getIsSeen().equalsIgnoreCase( "seen" )) {
-                holder.tvSeen.setVisibility( View.VISIBLE );
+            if (messageSend.getIsSeen().equalsIgnoreCase( "seen" )&&(position==list.size()-1)) {
+                Glide.with( context ).load( imgReceiver ).into( holder.imgAvatarStatusSeen );
             } else {
-                holder.tvSeen.setVisibility( View.GONE );
+                holder.imgAvatarStatusSeen.setVisibility( View.GONE );
             }
         } else {
             Glide.with( context ).load( imgReceiver ).into( holder.imgAvatar );
@@ -77,14 +77,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView imgAvatar;
+        CircleImageView imgAvatar,imgAvatarStatusSeen;
         TextView tvMessage, tvSeen;
 
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
             imgAvatar = itemView.findViewById( R.id.imgAvatarMess );
             tvMessage = itemView.findViewById( R.id.tvMessage );
-            tvSeen = itemView.findViewById( R.id.tvStatusSeen );
+            imgAvatarStatusSeen = itemView.findViewById( R.id.imgStatusSeenMessage );
         }
     }
 

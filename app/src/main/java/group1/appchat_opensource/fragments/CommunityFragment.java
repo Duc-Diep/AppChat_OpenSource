@@ -1,6 +1,8 @@
 package group1.appchat_opensource.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +76,64 @@ public class CommunityFragment extends Fragment {
             }
         });
         getAllUser();
+        binding.searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterUser(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         return binding.getRoot();
     }
+
+    private void filterUser(String s) {
+        listUser = new ArrayList<>();
+        data = FirebaseDatabase.getInstance().getReference("Users");
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listUser.clear();
+                listUser.add(new User("","",IMG_LINK_GROUP,"Community","Online"));
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    User otherUser = data.getValue(User.class);
+                    if(otherUser!=null&&!otherUser.getId().equals(userId)&&otherUser.getUsername().toLowerCase().contains(s.toLowerCase())){
+                        listUser.add(otherUser);
+                    }
+                }
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+
+                CommunityAdapter adapter = new CommunityAdapter(listUser,getContext());
+                adapter.setiOnClickChatItem(new IOnClickChatItem() {
+                    @Override
+                    public void IOnClickItem(User other_user) {
+                        Fragment fragment = ChatFragment.newInstance(other_user,user.getImage_url());
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_right).replace(R.id.layout_chat,fragment).addToBackStack(null).commit();
+                        // Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+                binding.rcvUsers.setLayoutManager(layoutManager);
+                binding.rcvUsers.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Error load users", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void getAllUser() {
         listUser = new ArrayList<>();
         data = FirebaseDatabase.getInstance().getReference("Users");
@@ -86,9 +143,9 @@ public class CommunityFragment extends Fragment {
                 listUser.clear();
                 listUser.add(new User("","",IMG_LINK_GROUP,"Community","Online"));
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    User user = data.getValue(User.class);
-                    if(user!=null&&!user.getId().equals(userId)){
-                        listUser.add(user);
+                    User otherUser = data.getValue(User.class);
+                    if(otherUser!=null&&!otherUser.getId().equals(userId)){
+                        listUser.add(otherUser);
                     }
                 }
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
