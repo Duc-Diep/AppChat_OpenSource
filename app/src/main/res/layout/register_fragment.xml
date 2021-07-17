@@ -3,27 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:background="@drawable/background"
         android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imgChat"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_10sdp"
             android:src="@drawable/logo" />
-
+        <TextView
+            android:id="@+id/textview_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng Ký"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/imgChat"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgChat"
-            android:layout_marginTop="@dimen/_20sdp">
+            android:layout_marginTop="@dimen/_50sdp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:drawableStart="@drawable/custom_email_icon"
                 android:id="@+id/edtEmail"
+                android:textColor="@color/text_color"
+                android:textColorHint="#4B413A"
+                android:background="@drawable/custom_text_input"
+                android:drawablePadding="10dp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your email" />
@@ -31,14 +50,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtPass"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutEdtEmail"
             android:layout_marginTop="@dimen/_20sdp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:drawableStart="@drawable/custom_lock_icon"
                 android:id="@+id/edtPass"
+                android:textColor="@color/text_color"
+                android:textColorHint="#4B413A"
+                android:background="@drawable/custom_text_input"
+                android:drawablePadding="10dp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your password"
@@ -47,14 +73,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtRePass"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutEdtPass"
             android:layout_marginTop="@dimen/_20sdp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:drawableStart="@drawable/custom_lock_icon"
                 android:id="@+id/edtRePass"
+                android:textColor="@color/text_color"
+                android:textColorHint="#4B413A"
+                android:background="@drawable/custom_text_input"
+                android:drawablePadding="10dp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Confirm your password"
@@ -64,31 +97,38 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtUsername"
-            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutEdtRePass"
             android:layout_marginTop="@dimen/_20sdp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:drawableStart="@drawable/user_icon"
                 android:id="@+id/edtUsername"
+                android:textColor="@color/text_color"
+                android:textColorHint="#4B413A"
+                android:background="@drawable/custom_text_input"
+                android:drawablePadding="10dp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your username" />
         </com.google.android.material.textfield.TextInputLayout>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegister"
-            android:background="@drawable/border_button"
+            android:background="@drawable/custom_login_button"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_35sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Register" />
         <TextView
             android:id="@+id/txtLogin"
-            android:textSize="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:textColor="#00E2FF"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/_10sdp"
             android:text="If you have account, Sign in now"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"
@@ -101,9 +141,11 @@
             android:visibility="invisible"
             android:layout_height="wrap_content"/>
         <RadioGroup
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal"
+            android:gravity="right"
             android:layout_below="@+id/layoutEdtUsername"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/_230sdp"
             android:layout_height="wrap_content">
             <RadioButton
                 android:checked="true"
