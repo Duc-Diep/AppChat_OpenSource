@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppChat_OpenSource">
         <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.ChatActivity" >
 <!--            <intent-filter>-->
@@ -23,11 +27,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity android:name=".activity.AuthActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
