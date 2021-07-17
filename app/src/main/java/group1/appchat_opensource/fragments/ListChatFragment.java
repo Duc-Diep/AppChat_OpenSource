@@ -1,6 +1,8 @@
 package group1.appchat_opensource.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,17 +82,69 @@ public class ListChatFragment extends Fragment {
         data = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         getCurrentUserInfor();
         getAllMessage();
-//        for (Message mes: listMessage
-//             ) {
-//            Log.d("TAG", "Message: "+mes.toString());
-//        }
         getAllUser();
+        binding.searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterUser(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         binding.btnCouple.setOnClickListener(v -> {
             Toast.makeText(getContext(), "This feature is under maintenance", Toast.LENGTH_SHORT).show();
         });
 
         return binding.getRoot();
+    }
+
+    private void filterUser(String s) {
+        data = FirebaseDatabase.getInstance().getReference("Users");
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listUser.clear();
+                for (String id : chatList) {
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        User otherUser = data.getValue(User.class);
+                        assert otherUser != null;
+                        if (otherUser.getId().equals(id)&&otherUser.getUsername().toLowerCase().contains(s.toLowerCase())) {
+                            listUser.add(0,otherUser);
+                        }
+                    }
+                }
+
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                ListChatsAdapter adapter = new ListChatsAdapter(listUser, getContext());
+                adapter.setiOnClickChatItem(new IOnClickChatItem() {
+                    @Override
+                    public void IOnClickItem(User other_user) {
+                        Fragment fragment = ChatFragment.newInstance(other_user, user.getImage_url());
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right).replace(R.id.layout_chat, fragment).addToBackStack(null).commit();
+                        // Toast.makeText(getContext(), user.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+                binding.rcvUsers.setLayoutManager(layoutManager);
+                binding.rcvUsers.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Error load users", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void getCurrentUserInfor() {
@@ -116,7 +170,6 @@ public class ListChatFragment extends Fragment {
     }
 
     public void getAllUser() {
-
         data = FirebaseDatabase.getInstance().getReference("Users");
         data.addValueEventListener(new ValueEventListener() {
             @Override

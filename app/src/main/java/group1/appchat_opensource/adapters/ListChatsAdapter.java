@@ -113,6 +113,7 @@ public class ListChatsAdapter extends RecyclerView.Adapter<ListChatsAdapter.View
                         } else {
                             lastMessage = "You : " + message.getContent();
                             if (message.getIsSeen().equalsIgnoreCase("seen") && message.getReceiverId().equals(user.getId()) && message.getSenderId().equals(firebaseUser.getUid())) {
+                                Log.d("Image", "onDataChange: "+user.getImage_url());
                                 Glide.with(context).load(user.getImage_url()).into(circleImageView);
                             } else {
                                 circleImageView.setVisibility(View.INVISIBLE);
