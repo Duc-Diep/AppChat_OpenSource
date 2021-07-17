@@ -77,7 +77,7 @@ public class LoginFragment extends Fragment {
             binding.edtPass.requestFocus();
             return;
         }
-        binding.progessBar.setVisibility( View.VISIBLE );
+        binding.progressBar.setVisibility( View.VISIBLE );
         mAuth.signInWithEmailAndPassword( email, password ).addOnCompleteListener( task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -95,11 +95,11 @@ public class LoginFragment extends Fragment {
                 if (binding.checkLogin.isChecked()){
                     FirebaseAuth.getInstance().updateCurrentUser( user );
                 }
-                binding.progessBar.setVisibility( View.GONE );
+                binding.progressBar.setVisibility( View.GONE );
                 startActivity( new Intent(getContext(),ChatActivity.class) );
             } else {
                 Toast.makeText( getContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT ).show();
-                binding.progessBar.setVisibility( View.GONE );
+                binding.progressBar.setVisibility( View.GONE );
             }
         } );
     }
@@ -111,10 +111,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null){
-            startActivity( new Intent(getContext(),ChatActivity.class) );
-        }
         //EventBus.getDefault().register(getContext());
     }
 

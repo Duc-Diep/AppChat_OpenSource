@@ -19,7 +19,7 @@
             android:id="@+id/textview_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="login"
+            android:text="Login"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/imgChat"
             android:layout_centerHorizontal="true"
@@ -31,30 +31,28 @@
             android:id="@+id/layoutEdtEmail"
             android:layout_centerHorizontal="true"
             android:layout_width="@dimen/_230sdp"
-            android:layout_height="@dimen/_27sdp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/imgChat"
             android:layout_marginTop="@dimen/_60sdp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:drawableStart="@drawable/custom_email_icon"
                 android:id="@+id/edtEmail"
-                android:fontFamily="@font/regular"
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
                 android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
                 android:hint="Enter your email"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_centerHorizontal="true"
             android:id="@+id/layoutEdtPass"
             android:layout_width="@dimen/_230sdp"
-            android:layout_height="@dimen/_27sdp"
+            android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
             android:layout_below="@id/layoutEdtEmail"
             android:layout_marginTop="@dimen/_20sdp">
@@ -65,14 +63,12 @@
                 android:drawablePadding="10dp"
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
-                android:padding="10dp"
-                android:fontFamily="@font/regular"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/edtPass"
                 android:inputType="textPassword"
                 android:hint="Enter your password"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
         <CheckBox
             android:layout_marginLeft="@dimen/_40sdp"
@@ -114,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ProgressBar
-            android:id="@+id/progessBar"
+            android:id="@+id/progressBar"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:visibility="invisible"
