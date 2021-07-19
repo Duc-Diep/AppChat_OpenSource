@@ -7,12 +7,12 @@
         android:src="@drawable/chat"
         android:layout_alignParentRight="true"
         android:id="@+id/imgAvatarMess"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"/>
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"/>
     <TextView
         android:id="@+id/tvMessage"
         android:layout_marginRight="@dimen/_10sdp"
-        android:background="@drawable/bgr_message_left"
+        android:background="@drawable/bgr_message_right"
         android:layout_toLeftOf="@id/imgAvatarMess"
         android:layout_width="wrap_content"
         android:text="Hello"

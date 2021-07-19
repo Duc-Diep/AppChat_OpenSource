@@ -10,8 +10,8 @@
 
         <ImageView
             android:id="@+id/imgChat"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_10sdp"
             android:src="@drawable/logo" />
@@ -29,9 +29,11 @@
             android:textStyle="bold" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
-            android:layout_width="@dimen/_230sdp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            android:layout_width="@dimen/_200sdp"
             android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/imgChat"
             android:layout_marginTop="@dimen/_50sdp">
 
@@ -41,8 +43,9 @@
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
-                android:drawablePadding="10dp"
-                android:textSize="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your email" />
@@ -50,9 +53,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtPass"
-            android:layout_width="@dimen/_230sdp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            android:layout_width="@dimen/_200sdp"
             android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/layoutEdtEmail"
             android:layout_marginTop="@dimen/_20sdp"
             app:passwordToggleEnabled="true">
@@ -63,8 +68,9 @@
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
-                android:drawablePadding="10dp"
-                android:textSize="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your password"
@@ -73,9 +79,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtRePass"
-            android:layout_width="@dimen/_230sdp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            android:layout_width="@dimen/_200sdp"
             android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/layoutEdtPass"
             android:layout_marginTop="@dimen/_20sdp"
             app:passwordToggleEnabled="true">
@@ -86,8 +94,9 @@
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
-                android:drawablePadding="10dp"
-                android:textSize="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Confirm your password"
@@ -97,9 +106,11 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtUsername"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             android:layout_centerHorizontal="true"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/layoutEdtRePass"
             android:layout_marginTop="@dimen/_20sdp">
 
@@ -109,8 +120,9 @@
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
-                android:drawablePadding="10dp"
-                android:textSize="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Enter your username" />
@@ -145,7 +157,7 @@
             android:orientation="horizontal"
             android:gravity="right"
             android:layout_below="@+id/layoutEdtUsername"
-            android:layout_width="@dimen/_230sdp"
+            android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content">
             <RadioButton
                 android:checked="true"
