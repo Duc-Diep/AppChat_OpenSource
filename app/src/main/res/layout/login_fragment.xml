@@ -10,8 +10,8 @@
 
         <ImageView
             android:id="@+id/imgChat"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_10sdp"
             android:src="@drawable/logo" />
@@ -29,19 +29,22 @@
             android:textStyle="bold" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
-            android:background="@null"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             android:layout_centerHorizontal="true"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/imgChat"
             android:layout_marginTop="@dimen/_60sdp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/custom_email_icon"
                 android:id="@+id/edtEmail"
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
+
                 android:drawablePadding="@dimen/_10sdp"
                 android:textSize="@dimen/_9sdp"
                 android:paddingTop="@dimen/_10sdp"
@@ -53,9 +56,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_centerHorizontal="true"
             android:id="@+id/layoutEdtPass"
-            android:background="@null"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             app:passwordToggleEnabled="true"
             android:layout_below="@id/layoutEdtEmail"
             android:layout_marginTop="@dimen/_20sdp">
@@ -75,7 +79,7 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
         <CheckBox
-            android:layout_marginLeft="@dimen/_27sdp"
+            android:layout_marginLeft="@dimen/_43sdp"
             android:fontFamily="@font/regular"
             android:id="@+id/checkLogin"
             android:text="Remember login"
