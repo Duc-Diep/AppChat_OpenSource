@@ -77,7 +77,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSignOut"
-            android:text="Sign Out"
+            android:text="Log Out"
             android:background="@drawable/custom_login_button"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
