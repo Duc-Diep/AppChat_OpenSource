@@ -16,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 import group1.appchat_opensource.R;
 import group1.appchat_opensource.databinding.ForgotpassFragmentBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPassFragment extends Fragment {
@@ -53,15 +51,13 @@ public class ForgotPassFragment extends Fragment {
             binding.edtEmail.requestFocus();
             return;
         }
-        mAthu.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(getContext(), "Please check your email to reset password", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Try again! Your email has some problem", Toast.LENGTH_SHORT).show();
-                }
+        mAthu.sendPasswordResetEmail(email).addOnCompleteListener( task -> {
+            if (task.isSuccessful()){
+                Toast.makeText(getContext(), "Please check your email to reset password", Toast.LENGTH_SHORT).show();
+            }else{
+                String message = task.getException().getMessage();
+                Toast.makeText(getContext(), "Try again! Error: "+ message, Toast.LENGTH_SHORT).show();
             }
-        });
+        } );
     }
 }
