@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout
-        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
             android:layout_marginTop="@dimen/_20sdp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtEmail"
-                android:hint="Enter your email"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@color/text_color"
+                android:textColorHint="#4B413A"
+                android:background="@drawable/custom_text_input"
+                android:textSize="@dimen/_9sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:hint="Enter your email" />
         </com.google.android.material.textfield.TextInputLayout>
-        <Button
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/layoutEdtEmail"
-            android:id="@+id/btnResetPass"
-            android:text="Reset Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-        </Button>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnResetPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutEdtEmail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/custom_login_button"
+            android:padding="@dimen/_10sdp"
+            android:text="Reset Password">
+
+        </androidx.appcompat.widget.AppCompatButton>
     </RelativeLayout>
 </layout>

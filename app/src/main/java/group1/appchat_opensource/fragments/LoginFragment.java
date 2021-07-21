@@ -14,14 +14,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.auth.FirebaseUser;
 
-import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import group1.appchat_opensource.R;
@@ -31,7 +27,6 @@ import group1.appchat_opensource.databinding.LoginFragmentBinding;
 public class LoginFragment extends Fragment {
     LoginFragmentBinding binding;
     FirebaseAuth mAuth;
-    String message = "";
 
     public static LoginFragment newInstance() {
 
@@ -68,12 +63,12 @@ public class LoginFragment extends Fragment {
         String email = binding.edtEmail.getText().toString().trim();
         String password = binding.edtPass.getText().toString().trim();
         if (!Patterns.EMAIL_ADDRESS.matcher( email ).matches()) {
-            binding.edtEmail.setError( "Không đúng định dạng emails" );
+            binding.edtEmail.setError( "Email is not correct!" );
             binding.edtEmail.requestFocus();
             return;
         }
         if (password.isEmpty()) {
-            binding.edtPass.setError( "Mật khẩu không được để trống" );
+            binding.edtPass.setError( "Password is not empty!" );
             binding.edtPass.requestFocus();
             return;
         }
@@ -81,32 +76,17 @@ public class LoginFragment extends Fragment {
         mAuth.signInWithEmailAndPassword( email, password ).addOnCompleteListener( task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                    if (user.isEmailVerified()) {
-//                        Intent intent = new Intent( getContext(), ChatActivity.class );
-//                        startActivity( intent );
-//                        //   EventBus.getDefault().post(new EventCloseActivity());
-//                        binding.progessBar.setVisibility( View.GONE );
-//                    } else {
-//                        user.sendEmailVerification();
-//                        binding.progessBar.setVisibility( View.GONE );
-//                        Toast.makeText( getContext(), "Please check your email to verify your account", Toast.LENGTH_SHORT ).show();
-//                    }
-                Toast.makeText( getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( getContext(), "Login success", Toast.LENGTH_SHORT ).show();
                 if (binding.checkLogin.isChecked()){
                     FirebaseAuth.getInstance().updateCurrentUser( user );
                 }
                 binding.progressBar.setVisibility( View.GONE );
                 startActivity( new Intent(getContext(),ChatActivity.class) );
             } else {
-                Toast.makeText( getContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( getContext(), "Login failed!", Toast.LENGTH_SHORT ).show();
                 binding.progressBar.setVisibility( View.GONE );
             }
         } );
-    }
-
-    public void ForgotPass(String email) {
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.sendPasswordResetEmail( email );
     }
     @Override
     public void onStart() {

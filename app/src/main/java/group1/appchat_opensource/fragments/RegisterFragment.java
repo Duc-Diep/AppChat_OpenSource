@@ -12,11 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -64,22 +62,22 @@ public class RegisterFragment extends Fragment {
         String gender = binding.rdBoy.isChecked() ? "Nam" : "Nữ";
         String urlImageDefault = binding.rdBoy.isChecked() ? Constant.IMG_LINK_MALE_DEFAULT : Constant.IMG_LINK_FEMALE_DEFAULT;
         if (!Patterns.EMAIL_ADDRESS.matcher( email ).matches()) {
-            binding.edtEmail.setError( "Không đúng định dạng email" );
+            binding.edtEmail.setError( "Email is not correct!" );
             binding.edtEmail.requestFocus();
             return;
         }
         if (pass.length() < 6) {
-            binding.edtPass.setError( "Mật khẩu phải có ít nhất 6 kí tự" );
+            binding.edtPass.setError( "Password length required more 6 characters" );
             binding.edtPass.requestFocus();
             return;
         }
         if (!repass.equals( pass )) {
-            binding.edtRePass.setError( "Không khớp mật khẩu" );
+            binding.edtRePass.setError( "Confirm Password is not equal password" );
             binding.edtRePass.requestFocus();
             return;
         }
         if (username.isEmpty()) {
-            binding.edtUsername.setError( "Không được để trống" );
+            binding.edtUsername.setError( "User name is not empty!" );
             binding.edtUsername.requestFocus();
             return;
         }
