@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/_10sdp">
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
             android:layout_width="match_parent"
