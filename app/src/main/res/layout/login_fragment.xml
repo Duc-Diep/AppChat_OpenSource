@@ -44,7 +44,6 @@
                 android:textColor="@color/text_color"
                 android:textColorHint="#4B413A"
                 android:background="@drawable/custom_text_input"
-
                 android:drawablePadding="@dimen/_10sdp"
                 android:textSize="@dimen/_9sdp"
                 android:paddingTop="@dimen/_10sdp"

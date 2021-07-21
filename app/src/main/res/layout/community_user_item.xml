@@ -2,21 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="@dimen/_10sdp"
-    android:layout_height="@dimen/_90sdp">
+    android:layout_height="@dimen/_55sdp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAvatarUserItem"
         android:src="@drawable/profile"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp" />
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp" />
 
     <ImageView
         android:id="@+id/imgStatusItem"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
         android:layout_toRightOf="@id/imgAvatarUserItem"
         android:layout_alignBottom="@id/imgAvatarUserItem"
-        android:layout_marginLeft="-20dp"
+        android:layout_marginLeft="-18dp"
         android:background="@drawable/is_online"
         />
     <TextView
@@ -24,8 +24,9 @@
         android:id="@+id/tvUsernameItem"
         android:layout_toRightOf="@id/imgAvatarUserItem"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:textSize="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/medium"
+        android:layout_marginTop="@dimen/_18sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
