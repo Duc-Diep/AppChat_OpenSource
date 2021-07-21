@@ -21,13 +21,14 @@
                 android:src="@drawable/ic_baseline_arrow_back_24" />
 
             <TextView
+                android:fontFamily="@font/medium"
                 android:id="@+id/tvUsername"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:gravity="center_vertical"
                 android:text="Unknown"
-                android:textSize="@dimen/_20sdp" />
+                android:textSize="@dimen/_18sdp" />
             <ImageView
                 android:id="@+id/btnMore"
                 android:layout_width="0dp"
@@ -56,28 +57,38 @@
                 android:layout_height="match_parent"/>
             <LinearLayout
                 android:id="@+id/layoutSender"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="@dimen/_30sdp">
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layoutEdtEmail"
                     android:layout_weight="5"
                     android:layout_width="0dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtMessage"
-                        android:hint="Type here"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/custom_text_input"
+                        android:fontFamily="@font/medium"
+                        android:hint="Type here"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="#4B413A" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <ImageView
                     android:id="@+id/btnSendMessage"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="@dimen/_10sdp"
-                    android:src="@drawable/ic_baseline_send_24"
-                    android:layout_height="match_parent"/>
+                    android:padding="@dimen/_3sdp"
+                    android:src="@drawable/ic_baseline_send_24" />
             </LinearLayout>
 
         </RelativeLayout>

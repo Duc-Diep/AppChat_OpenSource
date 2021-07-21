@@ -9,17 +9,19 @@
             android:layout_width="match_parent"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="@dimen/_40sdp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgAvatar"
                 android:src="@drawable/logo"
                 android:padding="@dimen/_3sdp"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"/>
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"/>
             <TextView
                 android:id="@+id/tvCommunity"
                 android:text="Community"
-                android:textSize="@dimen/_20sdp"
+                android:fontFamily="@font/medium"
+                android:textSize="@dimen/_14sdp"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
@@ -38,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:hint="Search"
+                    android:fontFamily="@font/medium"
                     android:drawablePadding="@dimen/_5sdp"
                     android:drawableStart="@drawable/search_icon"
                     android:paddingLeft="@dimen/_10sdp"

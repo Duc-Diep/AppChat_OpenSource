@@ -9,9 +9,10 @@
         android:id="@+id/tvTitle"
         android:text="Change Password"
         android:textStyle="bold"
-        android:textColor="#03A9F4"
+        android:textColor="#009688"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/_25sdp"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -21,12 +22,17 @@
         android:id="@+id/layoutEdtCurrentPass"
         android:layout_below="@id/tvTitle"
         android:layout_width="match_parent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:passwordToggleEnabled="true"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtCurrentPass"
+            android:textColor="@color/text_color"
+            android:textColorHint="#4B413A"
+            android:background="@drawable/custom_text_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
@@ -37,11 +43,17 @@
         android:id="@+id/layoutEdtNewPass"
         android:layout_width="match_parent"
         app:passwordToggleEnabled="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/layoutEdtCurrentPass">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtNewPass"
+            android:textColor="@color/text_color"
+            android:textColorHint="#4B413A"
+            android:background="@drawable/custom_text_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
@@ -52,19 +64,26 @@
         android:id="@+id/layoutEdtConfirmPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:passwordToggleEnabled="true"
         android:layout_below="@id/layoutEdtNewPass">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtConfirmPass"
+            android:textColor="@color/text_color"
+            android:textColorHint="#4B413A"
+            android:background="@drawable/custom_text_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
             android:hint="Enter your current password" />
     </com.google.android.material.textfield.TextInputLayout>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnChangePass"
-        android:background="@drawable/border_button"
+        android:background="@drawable/custom_login_button"
+        android:fontFamily="@font/regular"
         android:padding="@dimen/_5sdp"
         android:text="Change password"
         android:layout_width="wrap_content"
@@ -72,10 +91,11 @@
         android:layout_below="@id/layoutEdtConfirmPass"
         android:layout_height="wrap_content">
 
-    </Button>
-    <Button
+    </androidx.appcompat.widget.AppCompatButton>
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCancel"
-        android:background="@drawable/border_button"
+        android:background="@drawable/custom_login_button"
+        android:fontFamily="@font/regular"
         android:padding="@dimen/_5sdp"
         android:text="Cancel"
         android:layout_alignParentRight="true"
@@ -85,7 +105,7 @@
         android:layout_below="@id/layoutEdtConfirmPass"
         android:layout_height="wrap_content">
 
-    </Button>
+    </androidx.appcompat.widget.AppCompatButton>
     <ProgressBar
         android:id="@+id/processBar"
         android:layout_below="@+id/btnCancel"
