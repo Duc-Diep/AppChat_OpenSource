@@ -33,36 +33,39 @@
             app:boxStrokeWidthFocused="0dp"
             android:layout_width="@dimen/_200sdp"
             android:layout_centerHorizontal="true"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_33sdp"
             android:layout_below="@id/imgChat"
+            app:hintEnabled="false"
             android:layout_marginTop="@dimen/_50sdp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:drawableStart="@drawable/custom_email_icon"
                 android:id="@+id/edtEmail"
-                android:textColor="@color/text_color"
-                android:textColorHint="#4B413A"
-                android:background="@drawable/custom_text_input"
-                android:drawablePadding="@dimen/_10sdp"
-                android:textSize="@dimen/_9sdp"
-                android:paddingTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Enter your email" />
+                android:background="@drawable/custom_text_input"
+                android:drawableStart="@drawable/custom_email_icon"
+                android:drawablePadding="@dimen/_10sdp"
+                android:hint="Enter your email"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/text_color"
+                android:textColorHint="#4B413A"
+                android:textSize="@dimen/_9sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtPass"
+            app:hintEnabled="false"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             android:layout_width="@dimen/_200sdp"
             android:layout_centerHorizontal="true"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_33sdp"
             android:layout_below="@id/layoutEdtEmail"
             android:layout_marginTop="@dimen/_20sdp"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+
                 android:drawableStart="@drawable/custom_lock_icon"
                 android:id="@+id/edtPass"
                 android:textColor="@color/text_color"
@@ -79,11 +82,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtRePass"
+            app:hintEnabled="false"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             android:layout_width="@dimen/_200sdp"
             android:layout_centerHorizontal="true"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_33sdp"
             android:layout_below="@id/layoutEdtPass"
             android:layout_marginTop="@dimen/_20sdp"
             app:passwordToggleEnabled="true">
@@ -105,12 +109,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
+            app:hintEnabled="false"
             android:id="@+id/layoutEdtUsername"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             android:layout_centerHorizontal="true"
             android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_33sdp"
             android:layout_below="@id/layoutEdtRePass"
             android:layout_marginTop="@dimen/_20sdp">
 
@@ -133,6 +138,8 @@
             android:fontFamily="@font/regular"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/_35sdp"
+            android:paddingLeft="@dimen/_31sdp"
+            android:paddingRight="@dimen/_31sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -142,6 +149,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/bold"
             android:text="If you have account, Sign in now"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"
