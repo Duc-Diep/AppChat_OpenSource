@@ -3,30 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="match_parent"
         android:padding="@dimen/_10sdp">
-
-=======
-        android:layout_height="match_parent">
->>>>>>> 41a8f9f (layout and logic forgot password)
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutEdtEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_32sdp"
             android:layout_centerInParent="true"
-<<<<<<< HEAD
             app:boxStrokeWidth="0dp"
+            app:hintEnabled="false"
             app:boxStrokeWidthFocused="0dp"
-=======
->>>>>>> 41a8f9f (layout and logic forgot password)
             android:layout_marginTop="@dimen/_20sdp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtEmail"
-<<<<<<< HEAD
+                android:padding="@dimen/_1sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/text_color"
@@ -47,23 +39,6 @@
             android:background="@drawable/custom_login_button"
             android:padding="@dimen/_10sdp"
             android:text="Reset Password">
-
         </androidx.appcompat.widget.AppCompatButton>
-=======
-                android:hint="Enter your email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <Button
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/layoutEdtEmail"
-            android:id="@+id/btnResetPass"
-            android:text="Reset Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </Button>
->>>>>>> 41a8f9f (layout and logic forgot password)
     </RelativeLayout>
 </layout>
