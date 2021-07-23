@@ -39,7 +39,6 @@
             android:background="@drawable/custom_login_button"
             android:padding="@dimen/_10sdp"
             android:text="Reset Password">
-
         </androidx.appcompat.widget.AppCompatButton>
     </RelativeLayout>
 </layout>
