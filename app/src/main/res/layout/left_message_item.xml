@@ -6,8 +6,9 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:src="@drawable/chat"
         android:id="@+id/imgAvatarMess"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"/>
+        android:layout_centerVertical="true"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"/>
     <TextView
         android:layout_marginLeft="@dimen/_10sdp"
         android:id="@+id/tvMessage"
