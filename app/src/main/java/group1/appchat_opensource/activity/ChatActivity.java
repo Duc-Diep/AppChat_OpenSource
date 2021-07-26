@@ -56,11 +56,13 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         setStatus(STATUS_OFF);
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         setStatus(STATUS_OFF);
+
     }
 }

@@ -29,8 +29,10 @@ import java.util.List;
 
 import group1.appchat_opensource.R;
 import group1.appchat_opensource.adapters.MessageAdapter;
+import group1.appchat_opensource.adapters.MessageGroupAdapter;
 import group1.appchat_opensource.databinding.ChatFragmentBinding;
 import group1.appchat_opensource.objects.Message;
+import group1.appchat_opensource.objects.MessageGroup;
 import group1.appchat_opensource.objects.User;
 
 public class ChatFragment extends Fragment {
@@ -38,7 +40,9 @@ public class ChatFragment extends Fragment {
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     List<Message> list;
+    List<MessageGroup> listGroup;
     MessageAdapter adapter;
+    MessageGroupAdapter groupAdapter;
     ValueEventListener seenEventListener;
     User receiveUser;
     String imgUrlUser;
@@ -62,16 +66,30 @@ public class ChatFragment extends Fragment {
         imgUrlUser = getArguments().getString("imgurl");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         binding.tvUsername.setText(receiveUser.getUsername());
-        readMessage(firebaseUser.getUid(),receiveUser.getId());
-        binding.btnSendMessage.setOnClickListener(v->{
-            String message = binding.edtMessage.getText().toString().trim();
-            if (!message.isEmpty()){
-                sendMessage(firebaseUser.getUid(),receiveUser.getId(),message);
-                binding.edtMessage.setText(null);
-                readMessage(firebaseUser.getUid(),receiveUser.getId());
-            }
-        });
-        seenMessage(receiveUser.getId());
+        if (!receiveUser.getUsername().equals("Community")){
+            readMessage(firebaseUser.getUid(),receiveUser.getId());
+            binding.btnSendMessage.setOnClickListener(v->{
+                String message = binding.edtMessage.getText().toString().trim();
+                if (!message.isEmpty()){
+                    sendMessage(firebaseUser.getUid(),receiveUser.getId(),message);
+                    binding.edtMessage.setText(null);
+                    readMessage(firebaseUser.getUid(),receiveUser.getId());
+                }
+            });
+            seenMessage(receiveUser.getId());
+
+        }else{
+            readMessageGroup();
+            binding.btnSendMessage.setOnClickListener(v->{
+                String message = binding.edtMessage.getText().toString().trim();
+                if (!message.isEmpty()){
+                    sendMessageGroup(firebaseUser.getUid(),message);
+                    binding.edtMessage.setText(null);
+                    readMessageGroup();
+                }
+            });
+            seenMessageGroup(receiveUser.getId());
+        }
         binding.btnBack.setOnClickListener(v->{
             FragmentManager manager = getActivity().getSupportFragmentManager();
             manager.popBackStackImmediate();
@@ -90,7 +108,6 @@ public class ChatFragment extends Fragment {
         String date = df.format(Calendar.getInstance().getTime());
         hm.put("time",date);
         databaseReference.child("Chats").push().setValue(hm);
-
     }
     public void readMessage(String myId,String receiveID){
         list = new ArrayList<>();
@@ -107,7 +124,7 @@ public class ChatFragment extends Fragment {
                     }
                 }
                 adapter = new MessageAdapter(list,getContext());
-                adapter.setImgReceiver(receiveUser.getImage_url());
+                adapter.setUserReceiver(receiveUser);
                 adapter.setImgSender(imgUrlUser);
                 binding.rcvChats.setAdapter(adapter);
             }
@@ -145,14 +162,62 @@ public class ChatFragment extends Fragment {
         super.onPause();
         databaseReference.removeEventListener(seenEventListener);
     }
-    //
-//    @Override
-//    public View onCreateView(@NonNull  LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-//        binding = DataBindingUtil.inflate( inflater, R.layout.chat_fragment,container,false );
-//        return binding.getRoot();
-//    }
 
+    public void readMessageGroup(){
+        listGroup = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("GroupChat");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listGroup.clear();
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    MessageGroup messageGroup = dataSnapshot.getValue(MessageGroup.class);
+                        listGroup.add(messageGroup);
+                }
+                groupAdapter = new MessageGroupAdapter(listGroup,getContext());
+                binding.rcvChats.setAdapter(groupAdapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void sendMessageGroup(String senderId,String message){
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        HashMap<String,Object> hm = new HashMap<>();
+        hm.put("senderId",senderId);
+        hm.put("content",message);
+        hm.put("isSeen","unseen");
+        DateFormat df = new SimpleDateFormat("HH:mm, dd/MM/yyyy");
+        String date = df.format(Calendar.getInstance().getTime());
+        hm.put("time",date);
+        databaseReference.child("GroupChat").push().setValue(hm);
+    }
+
+    public void seenMessageGroup(String myID){
+        databaseReference = FirebaseDatabase.getInstance().getReference("GroupChat");
+        seenEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    String key = dataSnapshot.getKey();
+                    MessageGroup messageSend = dataSnapshot.getValue(MessageGroup.class);
+                    if (!messageSend.getSenderId().equals(myID)){
+                        HashMap<String,Object> hm = new HashMap<>();
+                        hm.put("isSeen","seen");
+                        databaseReference.child(key).updateChildren(hm);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
 }
