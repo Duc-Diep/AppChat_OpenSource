@@ -3,6 +3,9 @@ package group1.appchat_opensource.objects;
 public class MessageGroup {
     String content,senderId,time,isSeen;
 
+    public MessageGroup() {
+    }
+
     public MessageGroup(String content, String senderId, String time, String isSeen) {
         this.content = content;
         this.senderId = senderId;
