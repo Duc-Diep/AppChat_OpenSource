@@ -54,7 +54,6 @@ public class ListChatFragment extends Fragment {
     DatabaseReference data;
     String userId;
     List<User> listUser;
-    //    List<Message> listMessage;
     List<String> chatList;
     User user, currentUser;
     boolean check = false;
