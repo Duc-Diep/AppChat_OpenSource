@@ -81,7 +81,9 @@ public class LoginFragment extends Fragment {
                     FirebaseAuth.getInstance().updateCurrentUser( user );
                 }
                 binding.progressBar.setVisibility( View.GONE );
-                startActivity( new Intent(getContext(),ChatActivity.class) );
+                Intent intent = new Intent(getContext(),ChatActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity( intent );
             } else {
                 Toast.makeText( getContext(), "Login failed!", Toast.LENGTH_SHORT ).show();
                 binding.progressBar.setVisibility( View.GONE );
